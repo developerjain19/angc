@@ -8,7 +8,7 @@ class Admin extends CI_Controller
     {
         $get['title'] = "Admin Login";
         $get['favicon'] = "assets/images/logo.png";
-         $this->load->view('admin/login', $get);
+        $this->load->view('admin/login', $get);
     }
 
     public function login()
@@ -33,15 +33,12 @@ class Admin extends CI_Controller
                 } else {
 
 
-                    if($data[0]['status'] == 0)
-                    {
+                    if ($data[0]['status'] == 0) {
                         flashData('login_error', 'Your Profile Is Not Verified. Please Contact Admin ');
-                    }
-                    else
-                    {
-                    
-                    $this->session->set_userdata(array('staff_id' => $data[0]['uid'], 's_email' => $data[0]['email'], 's_number' => $data[0]['number'], 's_name' => $data[0]['name'], 'position' => $data[0]['position']));
-                    redirect('dashboard');
+                    } else {
+
+                        $this->session->set_userdata(array('staff_id' => $data[0]['uid'], 's_email' => $data[0]['email'], 's_number' => $data[0]['number'], 's_name' => $data[0]['name'], 'position' => $data[0]['position']));
+                        redirect('dashboard');
                     }
                 }
             } else {
@@ -59,8 +56,44 @@ class Admin extends CI_Controller
         redirect(base_url());
     }
 
+    public function leadlogin()
+    {
+        $this->form_validation->set_rules('number', 'User Name', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_error_delimiters('<div style="color: red;">', '</div>');
 
- 
+        if ($this->form_validation->run()) {
+            $number = $_POST['number'];
+            $password = $_POST['password'];
+            $data =  $this->CommonModal->getRowById('tbl_leads', 'number', $number);
 
-   
+            if ($data) {
+                $f_password = $data[0]['password'];
+                if ($password != $f_password) {
+                    flashData('login_error', 'Enter a valid Password.');
+                } else {
+                    if ($data[0]['verification'] == 'New') {
+                        flashData('login_error', 'Your Profile Is Not Verified. Please Contact Admin ');
+                    } else {
+
+                        $this->session->set_userdata(array('lid' => $data[0]['lid'], 'name' => $data[0]['name'], 'number' => $data[0]['number'], 'number' => $data[0]['number']));
+                        // print_r($_SESSION);
+                        redirect('user_panel');
+                    }
+                }
+            } else {
+                flashData('login_error', 'Enter a valid number');
+            }
+        }
+        redirect('lead_login');
+    }
+
+
+    public function leadlogout()
+    {
+        $this->load->library('session');
+        $this->session->unset_userdata('lid');
+
+        redirect('lead_login');
+    }
 }

@@ -6,49 +6,23 @@
 
 <body>
 
-
-    <section class="section pb-0 hero-section" id="hero">
+    <section class="pb-0 hero-section" id="hero" style="background-image: url('<?= base_url() ?>assets/Shiny Overlay.svg');background-size: cover;
+    height: 100vh; background-position:center;">
         <div class="auth-page-content overflow-hidden pt-lg-5">
             <div class="container">
                 <div class="row">
-
-                    <div class="col-lg-12">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
                         <div class="card overflow-hidden m-0">
-
                             <div class="row justify-content-center g-0">
-                                <div class="col-lg-6">
-                                    <div class="p-lg-5 p-4 auth-one-bg h-100">
-                                        <div class="bg-overlay"></div>
-
-                                        <div class="position-relative h-100 d-flex flex-column">
-                                            <div class="mb-4">
-                                                <a href="<?= base_url() ?>" class="d-block">
-                                                    <img src="<?= base_url() ?>assets/logo.png" alt="" height="18">
-                                                </a>
-                                            </div>
-                                            <div class="mt-auto">
-                                                <div>
-                                                    <div class="carousel-inner text-center text-white-50 pb-5">
-                                                        <div class="carousel-item active">
-                                                            <img src="<?= base_url() ?>assets/staff.jpg" style="max-height:400px; width: 100%;">
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="p-lg-5 p-4">
                                         <div>
-                                            <h1 class="display-6 fw-semibold mb-3 lh-base"> <span class="text-success">Staff Registration </span></h1>
-                                            <p class="text-muted">Sign in to continue to ANGC.</p>
+                                            <h1 class="display-6 fw-semibold mb-3 lh-base text-center"> <span class="text-primary">Staff Registration </span></h1>
+                                            <p class="text-muted text-center">Sign in to continue to ANGC.</p>
                                         </div>
 
                                         <div class="mt-4">
-
                                             <h5> <?php if ($msg = $this->session->userdata('regmsg')) : ?>
                                                     <div class="row">
                                                         <div class="col-lg-12">
@@ -61,7 +35,6 @@
                                             </h5>
 
                                             <form class="form-horizontal" method="POST" action="<?php echo base_url() . 'staff_regsiteration'; ?>">
-
                                                 <div class="mb-3">
                                                     <label for="exampleInputName1">Name</label>
                                                     <input type="text" class="form-control" name="name" id="fullname" placeholder="Your Name:" required>
@@ -86,7 +59,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="mt-4">
-                                                    <button class="btn btn-success w-100" type="submit">Sign Up</button>
+                                                    <button class="btn btn-primary w-100" type="submit">Sign Up</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -103,6 +76,9 @@
             </div>
         </div>
     </section>
+
+
+
     <?php $this->load->view('admin/template/footer_link'); ?>
 
 </body>
@@ -150,17 +126,12 @@
             e.preventDefault();
         }
     });
-    
-    
-    $('.password-input').keyup(function(e)
-                                {
-  if (/\D/g.test(this.value))
-  {
-    // Filter non-digits from input value.
-    this.value = this.value.replace(/\D/g, '');
-  }
-});
-    
-    
-    
+
+
+    $('.password-input').keyup(function(e) {
+        if (/\D/g.test(this.value)) {
+            // Filter non-digits from input value.
+            this.value = this.value.replace(/\D/g, '');
+        }
+    });
 </script>

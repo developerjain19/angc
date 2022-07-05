@@ -11,49 +11,23 @@
         <?php include('includes/header.php'); ?>
 
 
-        <section class="section pb-0 hero-section" id="login">
+        <section class="section pb-0 hero-section" id="login" style="background-image: url('<?= base_url() ?>assets/Shiny Overlay.svg');background-size: cover;
+    height: 100vh; background-position:center">
             <div class="auth-page-content overflow-hidden pt-lg-5">
                 <div class="container">
                     <div class="row">
-
-                        <div class="col-lg-12">
+                    <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
                             <div class="card overflow-hidden m-0">
 
                                 <div class="row justify-content-center g-0">
-                                    <div class="col-lg-6">
-                                        <div class="p-lg-5 p-4 auth-one-bg h-100">
-                                            <div class="bg-overlay"></div>
+                                   
 
-                                            <div class="position-relative h-100 d-flex flex-column">
-                                                <div class="mb-4">
-                                                    <a href="<?= base_url() ?>" class="d-block">
-                                                        <img src="<?= base_url() ?>assets/logo.png" alt="" height="18">
-                                                    </a>
-                                                </div>
-                                                <div class="mt-auto">
-
-
-                                                    <div>
-
-                                                        <div class="carousel-inner text-center text-white-50 pb-5">
-                                                            <div class="carousel-item active">
-                                                                <img src="<?= base_url() ?>assets/abc.png" style="width:100%;">
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                    <!-- end carousel -->
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <div class="p-lg-5 p-4">
                                             <div>
-                                                <h1 class="display-6 fw-semibold mb-3 lh-base"> <span class="text-success">Login Here </span></h1>
-                                                <p class="text-muted">Sign in to continue to ANGC.</p>
+                                                <h1 class="display-6 fw-semibold mb-3 lh-base text-center"> <span class="text-primary">Login Here </span></h1>
+                                                <p class="text-muted text-center">Sign in to continue to ANGC.</p>
                                             </div>
 
                                             <div class="mt-4">
@@ -99,7 +73,7 @@
 
 
                                                     <div class="mt-4">
-                                                        <button class="btn btn-success w-100" type="submit">Sign In</button>
+                                                        <button class="btn btn-primary w-100" type="submit">Sign In</button>
                                                     </div>
 
 

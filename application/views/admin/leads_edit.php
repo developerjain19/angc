@@ -65,17 +65,7 @@
 
                                                 </br>
 
-                                                <?php
-                                                if (sessionId('position') == '1') {
-                                                ?>
-                                                    <div class="col-md-12">
-                                                        <label class="form-label">Comment</label>
-                                                        <textarea class="form-control pd-r-80" name="comment"><?= $leads[0]['comment'] ?>
-                                                    </textarea>
-                                                    </div>
-                                                <?php
-                                                }
-                                                ?>
+                                                
 
                                             </div>
 

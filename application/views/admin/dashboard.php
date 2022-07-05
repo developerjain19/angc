@@ -40,6 +40,7 @@
                 <div class="col-xxl-12">
                   <div class="row">
                     <div class="col-xl-4">
+
                       <div class="card card-animate">
                         <div class="card-body">
                           <div class="d-flex align-items-center">
@@ -60,73 +61,80 @@
                           </div>
                         </div><!-- end card body -->
                       </div>
+
+                    </div>
+
+                    <div class="col-xl-4">
+                      <a href="<?= base_url(); ?>leads?status=New">
+                        <div class="card card-animate">
+                          <div class="card-body">
+                            <div class="d-flex align-items-center">
+                              <div class="avatar-sm flex-shrink-0">
+                                <span class="avatar-title bg-soft-warning text-warning rounded-2 fs-2">
+                                  <i data-feather="award" class="text-warning"></i>
+                                </span>
+                              </div>
+                              <div class="flex-grow-1 ms-3">
+                                <p class="text-uppercase fw-medium text-muted mb-3">New Leads</p>
+                                <div class="d-flex align-items-center mb-3">
+                                  <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="7522"><?= $snew ?></span></h4>
+
+                                </div>
+                                <p class="text-muted mb-0">Leads this month</p>
+                              </div>
+                            </div>
+                          </div><!-- end card body -->
+                        </div>
+                      </a>
                     </div><!-- end col -->
 
                     <div class="col-xl-4">
-                      <div class="card card-animate">
-                        <div class="card-body">
-                          <div class="d-flex align-items-center">
-                            <div class="avatar-sm flex-shrink-0">
-                              <span class="avatar-title bg-soft-warning text-warning rounded-2 fs-2">
-                                <i data-feather="award" class="text-warning"></i>
-                              </span>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <p class="text-uppercase fw-medium text-muted mb-3">New Leads</p>
-                              <div class="d-flex align-items-center mb-3">
-                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="7522"><?= $snew ?></span></h4>
-
+                      <a href="<?= base_url(); ?>leads?status=Verified">
+                        <div class="card card-animate">
+                          <div class="card-body">
+                            <div class="d-flex align-items-center">
+                              <div class="avatar-sm flex-shrink-0">
+                                <span class="avatar-title bg-soft-success text-info rounded-2 fs-2">
+                                  <i data-feather="clock" class="text-info"></i>
+                                </span>
                               </div>
-                              <p class="text-muted mb-0">Leads this month</p>
+                              <div class="flex-grow-1 overflow-hidden ms-3">
+                                <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                  Varified Leads</p>
+                                <div class="d-flex align-items-center mb-3">
+                                  <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="168"><?= $sverified ?></span></h4>
+                                </div>
+                                <p class="text-muted mb-0">All Varified Leads</p>
+                              </div>
                             </div>
-                          </div>
-                        </div><!-- end card body -->
-                      </div>
+                          </div><!-- end card body -->
+                        </div>
+                      </a>
                     </div><!-- end col -->
 
                     <div class="col-xl-4">
-                      <div class="card card-animate">
-                        <div class="card-body">
-                          <div class="d-flex align-items-center">
-                            <div class="avatar-sm flex-shrink-0">
-                              <span class="avatar-title bg-soft-success text-info rounded-2 fs-2">
-                                <i data-feather="clock" class="text-info"></i>
-                              </span>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden ms-3">
-                              <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
-                                Varified Leads</p>
-                              <div class="d-flex align-items-center mb-3">
-                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="168"><?= $sverified ?></span></h4>
+                      <a href="<?= base_url(); ?>leads?status=Reject">
+                        <div class="card card-animate">
+                          <div class="card-body">
+                            <div class="d-flex align-items-center">
+                              <div class="avatar-sm flex-shrink-0">
+                                <span class="avatar-title bg-soft-info text-info rounded-2 fs-2">
+                                  <i data-feather="clock" class="text-info"></i>
+                                </span>
                               </div>
-                              <p class="text-muted mb-0">All Varified Leads</p>
-                            </div>
-                          </div>
-                        </div><!-- end card body -->
-                      </div>
-                    </div><!-- end col -->
+                              <div class="flex-grow-1 overflow-hidden ms-3">
+                                <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                  Reject Leads</p>
+                                <div class="d-flex align-items-center mb-3">
+                                  <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="168"><?= $sreject ?></span></h4>
 
-                    <div class="col-xl-4">
-                      <div class="card card-animate">
-                        <div class="card-body">
-                          <div class="d-flex align-items-center">
-                            <div class="avatar-sm flex-shrink-0">
-                              <span class="avatar-title bg-soft-info text-info rounded-2 fs-2">
-                                <i data-feather="clock" class="text-info"></i>
-                              </span>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden ms-3">
-                              <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
-                                Rejected Leads</p>
-                              <div class="d-flex align-items-center mb-3">
-                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="168"><?= $sreject ?></span></h4>
-
+                                </div>
+                                <p class="text-muted mb-0">All Reject Leads</p>
                               </div>
-                              <p class="text-muted mb-0">All Rejected Leads</p>
                             </div>
-                          </div>
-                        </div><!-- end card body -->
-                      </div>
+                          </div><!-- end card body -->
+                        </div>
+                      </a>
                     </div>
                   </div>
 
@@ -169,70 +177,100 @@
                     </div><!-- end col -->
 
                     <div class="col-xl-4">
-                      <div class="card card-animate">
-                        <div class="card-body">
-                          <div class="d-flex align-items-center">
-                            <div class="avatar-sm flex-shrink-0">
-                              <span class="avatar-title bg-soft-warning text-warning rounded-2 fs-2">
-                                <i data-feather="award" class="text-warning"></i>
-                              </span>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <p class="text-uppercase fw-medium text-muted mb-3">New Leads</p>
-                              <div class="d-flex align-items-center mb-3">
-                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="7522"><?= $new ?></span></h4>
-
+                      <a href="<?= base_url(); ?>leads?status=New">
+                        <div class="card card-animate">
+                          <div class="card-body">
+                            <div class="d-flex align-items-center">
+                              <div class="avatar-sm flex-shrink-0">
+                                <span class="avatar-title bg-soft-warning text-warning rounded-2 fs-2">
+                                  <i data-feather="award" class="text-warning"></i>
+                                </span>
                               </div>
-                              <p class="text-muted mb-0">New Leads </p>
+                              <div class="flex-grow-1 ms-3">
+                                <p class="text-uppercase fw-medium text-muted mb-3">New Leads</p>
+                                <div class="d-flex align-items-center mb-3">
+                                  <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="7522"><?= $new ?></span></h4>
+
+                                </div>
+                                <p class="text-muted mb-0">New Leads </p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </a>
                     </div><!-- end col -->
 
                     <div class="col-xl-4">
-                      <div class="card card-animate">
-                        <div class="card-body">
-                          <div class="d-flex align-items-center">
-                            <div class="avatar-sm flex-shrink-0">
-                              <span class="avatar-title bg-soft-success text-info rounded-2 fs-2">
-                                <i data-feather="clock" class="text-info"></i>
-                              </span>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden ms-3">
-                              <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
-                                Varified Leads</p>
-                              <div class="d-flex align-items-center mb-3">
-                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="168"><?= $verified ?></span></h4>
+                      <a href="<?= base_url(); ?>leads?status=Verified">
+                        <div class="card card-animate">
+                          <div class="card-body">
+                            <div class="d-flex align-items-center">
+                              <div class="avatar-sm flex-shrink-0">
+                                <span class="avatar-title bg-soft-success text-info rounded-2 fs-2">
+                                  <i data-feather="clock" class="text-info"></i>
+                                </span>
                               </div>
-                              <p class="text-muted mb-0">All Varified Leads</p>
+                              <div class="flex-grow-1 overflow-hidden ms-3">
+                                <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                  Varified Leads</p>
+                                <div class="d-flex align-items-center mb-3">
+                                  <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="168"><?= $verified ?></span></h4>
+                                </div>
+                                <p class="text-muted mb-0">All Varified Leads</p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </a>
+                    </div>
+                    <div class="col-xl-4">
+                      <a href="<?= base_url(); ?>leads?status=Reject">
+                        <div class="card card-animate">
+                          <div class="card-body">
+                            <div class="d-flex align-items-center">
+                              <div class="avatar-sm flex-shrink-0">
+                                <span class="avatar-title bg-soft-info text-info rounded-2 fs-2">
+                                  <i data-feather="clock" class="text-info"></i>
+                                </span>
+                              </div>
+                              <div class="flex-grow-1 overflow-hidden ms-3">
+                                <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                  Reject Leads</p>
+                                <div class="d-flex align-items-center mb-3">
+                                  <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="168"><?= $reject ?></span></h4>
+
+                                </div>
+                                <p class="text-muted mb-0">All Reject Leads</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
                     </div>
 
                     <div class="col-xl-4">
-                      <div class="card card-animate">
-                        <div class="card-body">
-                          <div class="d-flex align-items-center">
-                            <div class="avatar-sm flex-shrink-0">
-                              <span class="avatar-title bg-soft-info text-info rounded-2 fs-2">
-                                <i data-feather="clock" class="text-info"></i>
-                              </span>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden ms-3">
-                              <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
-                                Total Staff</p>
-                              <div class="d-flex align-items-center mb-3">
-                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="168"><?= $staff ?></span></h4>
-
+                      <a href="<?= base_url('staff'); ?>">
+                        <div class="card card-animate">
+                          <div class="card-body">
+                            <div class="d-flex align-items-center">
+                              <div class="avatar-sm flex-shrink-0">
+                                <span class="avatar-title bg-soft-info text-info rounded-2 fs-2">
+                                  <i data-feather="clock" class="text-info"></i>
+                                </span>
                               </div>
-                              <p class="text-muted mb-0">Total No of Staff</p>
+                              <div class="flex-grow-1 overflow-hidden ms-3">
+                                <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                  Total Staff</p>
+                                <div class="d-flex align-items-center mb-3">
+                                  <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="168"><?= $staff ?></span></h4>
+
+                                </div>
+                                <p class="text-muted mb-0">Total No of Staff</p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </a>
                     </div>
                   </div>
 
@@ -242,8 +280,6 @@
             <?php
             }
             ?>
-
-
 
 
             <?php
@@ -277,70 +313,76 @@
                     </div><!-- end col -->
 
                     <div class="col-xl-4">
-                      <div class="card card-animate">
-                        <div class="card-body">
-                          <div class="d-flex align-items-center">
-                            <div class="avatar-sm flex-shrink-0">
-                              <span class="avatar-title bg-soft-warning text-warning rounded-2 fs-2">
-                                <i data-feather="award" class="text-warning"></i>
-                              </span>
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                              <p class="text-uppercase fw-medium text-muted mb-3">New Leads</p>
-                              <div class="d-flex align-items-center mb-3">
-                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="7522"><?= $vnew ?></span></h4>
-
+                      <a href="<?= base_url(); ?>leads?status=New">
+                        <div class="card card-animate">
+                          <div class="card-body">
+                            <div class="d-flex align-items-center">
+                              <div class="avatar-sm flex-shrink-0">
+                                <span class="avatar-title bg-soft-warning text-warning rounded-2 fs-2">
+                                  <i data-feather="award" class="text-warning"></i>
+                                </span>
                               </div>
-                              <p class="text-muted mb-0">Leads this month</p>
+                              <div class="flex-grow-1 ms-3">
+                                <p class="text-uppercase fw-medium text-muted mb-3">New Leads</p>
+                                <div class="d-flex align-items-center mb-3">
+                                  <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="7522"><?= $vnew ?></span></h4>
+
+                                </div>
+                                <p class="text-muted mb-0">Leads this month</p>
+                              </div>
                             </div>
-                          </div>
-                        </div><!-- end card body -->
-                      </div>
+                          </div><!-- end card body -->
+                        </div>
+                      </a>
                     </div><!-- end col -->
 
                     <div class="col-xl-4">
-                      <div class="card card-animate">
-                        <div class="card-body">
-                          <div class="d-flex align-items-center">
-                            <div class="avatar-sm flex-shrink-0">
-                              <span class="avatar-title bg-soft-success text-info rounded-2 fs-2">
-                                <i data-feather="clock" class="text-info"></i>
-                              </span>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden ms-3">
-                              <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
-                                Varified Leads</p>
-                              <div class="d-flex align-items-center mb-3">
-                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="168"><?= $vverified ?></span></h4>
+                      <a href="<?= base_url(); ?>leads?status=Verified">
+                        <div class="card card-animate">
+                          <div class="card-body">
+                            <div class="d-flex align-items-center">
+                              <div class="avatar-sm flex-shrink-0">
+                                <span class="avatar-title bg-soft-success text-info rounded-2 fs-2">
+                                  <i data-feather="clock" class="text-info"></i>
+                                </span>
                               </div>
-                              <p class="text-muted mb-0">All Varified Leads</p>
+                              <div class="flex-grow-1 overflow-hidden ms-3">
+                                <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                  Varified Leads</p>
+                                <div class="d-flex align-items-center mb-3">
+                                  <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="168"><?= $vverified ?></span></h4>
+                                </div>
+                                <p class="text-muted mb-0">All Varified Leads</p>
+                              </div>
                             </div>
-                          </div>
-                        </div><!-- end card body -->
-                      </div>
+                          </div><!-- end card body -->
+                        </div>
+                      </a>
                     </div><!-- end col -->
 
                     <div class="col-xl-4">
-                      <div class="card card-animate">
-                        <div class="card-body">
-                          <div class="d-flex align-items-center">
-                            <div class="avatar-sm flex-shrink-0">
-                              <span class="avatar-title bg-soft-info text-info rounded-2 fs-2">
-                                <i data-feather="clock" class="text-info"></i>
-                              </span>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden ms-3">
-                              <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
-                                Rejected Leads</p>
-                              <div class="d-flex align-items-center mb-3">
-                                <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="168"><?= $vreject ?></span></h4>
-
+                      <a href="<?= base_url(); ?>leads?status=Reject">
+                        <div class="card card-animate">
+                          <div class="card-body">
+                            <div class="d-flex align-items-center">
+                              <div class="avatar-sm flex-shrink-0">
+                                <span class="avatar-title bg-soft-info text-info rounded-2 fs-2">
+                                  <i data-feather="clock" class="text-info"></i>
+                                </span>
                               </div>
-                              <p class="text-muted mb-0">All Rejected Leads</p>
+                              <div class="flex-grow-1 overflow-hidden ms-3">
+                                <p class="text-uppercase fw-medium text-muted text-truncate mb-3">
+                                  Reject Leads</p>
+                                <div class="d-flex align-items-center mb-3">
+                                  <h4 class="fs-4 flex-grow-1 mb-0"><span class="counter-value" data-target="168"><?= $vreject ?></span></h4>
+
+                                </div>
+                                <p class="text-muted mb-0">All Reject Leads</p>
+                              </div>
                             </div>
-                          </div>
-                        </div><!-- end card body -->
-                      </div>
+                          </div><!-- end card body -->
+                        </div>
+                      </a>
                     </div>
                   </div>
 

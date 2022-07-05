@@ -15,3 +15,7 @@ $route['leads'] = 'admin_Dashboard/leads';
 $route['staff'] = 'admin_Dashboard/staff';
 $route['lead_type'] = 'admin_Dashboard/lead_type';
 $route['service_type'] = 'admin_Dashboard/service_type';
+$route['admincomment'] = 'admin_Dashboard/admincomment';
+$route['lead_login'] = 'Home/lead_login';
+
+$route['user_panel'] = 'LeadPanel/user_panel';

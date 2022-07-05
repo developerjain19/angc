@@ -430,15 +430,15 @@ function sendNotificationUser($device_id, $title, $message)
 	return $results;
 }
 
-function sendEmail($mail , $order)
+function sendmail($to, $subject, $message)
 {
 
-	$ci = &get_instance();
-	$ci->email->from('webangeltechnologies@gmail.com', 'Srimitra');
-	$ci->email->to($mail);
+	$headers = "MIME-Version: 1.0" . "\r\n";
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-	$ci->email->subject('Srimitra India');
-	$ci->email->message(order_mail($order));
-// print_R(order_mail($order));
-	$send =  $ci->email->send();
+	// More headers
+	$headers .= 'From: info@angcgroup.com' . "\r\n";
+	$headers .= 'Cc: ' . $to . "\r\n";
+
+	mail($to, $subject, $message, $headers);
 }

@@ -25,7 +25,7 @@ class Home extends CI_Controller
         }
         if (count($_POST) > 0) {
             $formdata = $this->input->post();
-              $formdata['staff_code'] = 'ANST' . rand(10, 1000);
+            $formdata['staff_code'] = 'ANST' . rand(10, 1000);
             $table = "tbl_staff";
 
             if (strlen($formdata['number']) == 10) {
@@ -62,6 +62,17 @@ class Home extends CI_Controller
             $data['title'] = 'Staff Registeration | ANGC Group Pvy Ltd';
             $data['logo'] = 'assets/logo.png';
             $this->load->view('staff_registeration', $data);
+        }
+    }
+
+    public function lead_login()
+    {
+        if ($this->session->has_userdata('lid')) {
+            redirect(base_url('user_panel'));
+        } else {
+            $data['title'] = 'User Profile | ANGC Group Pvy Ltd';
+            $data['logo'] = 'assets/logo.png';
+            $this->load->view('lead-login', $data);
         }
     }
 }

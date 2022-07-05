@@ -73,7 +73,7 @@
                                                 <th class="sort" data-sort="lead_name">Name</th>
                                                 <th class="sort" data-sort="email">Email</th>
                                                 <th class="sort" data-sort="phone">Phone</th>
-                                                <!--<th class="sort" data-sort="phone">DOB</th>-->
+
                                                 <th class="sort" data-sort="status">Varification</th>
 
                                                 <?php
@@ -83,6 +83,7 @@
                                                 <?php
                                                 }
                                                 ?>
+                                                <th class="sort" data-sort="phone">Working Status</th>
 
 
                                                 <th class="sort" data-sort="action">Action</th>
@@ -143,11 +144,19 @@
                                                                     <?php
                                                                     }
                                                                     ?>
-
-
-
-
                                                                 </select>
+                                                            </td>
+
+                                                            <td class="Working status">
+
+                                                                <select name="working_status" class="form-control wstatus" id="wstatus<?= $row['lid'] ?>" data-id="<?= $row['lid'] ?>">
+
+                                                                    <option value="New" <?= (($row['working_status'] == 'New') ? 'selected' : '') ?>>New</option>
+                                                                    <option value="Working" <?= (($row['working_status'] == 'Working') ? 'selected' : '') ?>>Working</option>
+                                                                    <option value="Pending" <?= (($row['working_status'] == 'Pending') ? 'selected' : '') ?>>Pending</option>
+                                                                    <option value="Cancelled" <?= (($row['working_status'] == 'Cancelled') ? 'selected' : '') ?>>Cancelled</option>
+                                                                </select>
+
                                                             </td>
 
                                                             <td>
@@ -204,7 +213,9 @@
 
                                                             <td class="status">
 
-                                                                <span class="badge badge-soft-success text-uppercase"><?= $row['verification'] ?></span>
+                                                                <span class="badge badge-soft-<?= (($row['verification'] == 'New') ? 'primary'
+                                                                                                    : (($row['verification'] == 'Verified') ? 'success' : 'danger')) ?> text-uppercase">
+                                                                    <?= $row['verification'] ?></span>
                                                             </td>
 
 
@@ -226,12 +237,21 @@
                                                                     <?php
                                                                     }
                                                                     ?>
-
-
-
-
                                                                 </select>
                                                             </td>
+
+                                                            <td class="Working status">
+
+                                                                <select name="working_status" class="form-control wstatus" id="wstatus<?= $row['lid'] ?>" data-id="<?= $row['lid'] ?>">
+
+                                                                    <option value="New" <?= (($row['working_status'] == 'New') ? 'selected' : '') ?>>New</option>
+                                                                    <option value="Working" <?= (($row['working_status'] == 'Working') ? 'selected' : '') ?>>Working</option>
+                                                                    <option value="Pending" <?= (($row['working_status'] == 'Pending') ? 'selected' : '') ?>>Pending</option>
+                                                                    <option value="Cancelled" <?= (($row['working_status'] == 'Cancelled') ? 'selected' : '') ?>>Cancelled</option>
+                                                                </select>
+
+                                                            </td>
+
 
                                                             <td>
                                                                 <div class="d-flex gap-2">
@@ -297,15 +317,28 @@
                                                                 </select>
 
                                                             </td>
+
+
+                                                            <td class="Working status">
+
+                                                                <select name="working_status" class="form-control wstatus" id="wstatus<?= $row['lid'] ?>" data-id="<?= $row['lid'] ?>">
+
+                                                                    <option value="New" <?= (($row['working_status'] == 'New') ? 'selected' : '') ?>>New</option>
+                                                                    <option value="Working" <?= (($row['working_status'] == 'Working') ? 'selected' : '') ?>>Working</option>
+                                                                    <option value="Pending" <?= (($row['working_status'] == 'Pending') ? 'selected' : '') ?>>Pending</option>
+                                                                    <option value="Cancelled" <?= (($row['working_status'] == 'Cancelled') ? 'selected' : '') ?>>Cancelled</option>
+                                                                </select>
+
+                                                            </td>
                                                             <td class="status">
                                                                 <div class="d-flex gap-2">
                                                                     <div class="edit">
                                                                         <a href="<?= base_url("documents/$lid") ?>" class="btn btn-sm btn-danger edit-item-btn">Document Checklist</a>
                                                                     </div>
 
-                                                                    <div class="edit">
-                                                                        <a href="<?= base_url("leads_edit/$lid") ?>" class="btn btn-sm btn-success">Edit</a>
-                                                                    </div>
+                                                                    <!-- <div class="edit">
+                                                <a href="<?= base_url("leads_edit/$lid") ?>" class="btn btn-sm btn-success">Edit</a>
+                                            </div> -->
 
                                                                 </div>
                                                             </td>
@@ -450,6 +483,24 @@
         });
 
 
+        $('.wstatus').change(function() {
+            var pid = $(this).data('id');
+            var wstatus = $('#wstatus' + pid).val();
+            $.ajax({
+                method: "POST",
+                url: "<?= base_url('admin_Dashboard/leadworkingstatus') ?>",
+                data: {
+                    wstatus: wstatus,
+                    pid: pid
+                },
+                success: function(response) {
+                    $('#positiondmsg').html('');
+                    alert('Working Status Updated Successfully');
+                }
+            });
+        });
+
+
         $('.featuredhm').change(function() {
 
             var pid = $(this).data('id');
@@ -467,8 +518,6 @@
                 }
             });
         });
-
-
 
         $(document).ready(function() {
             $('#myTable').DataTable();

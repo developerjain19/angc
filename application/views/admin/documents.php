@@ -86,7 +86,7 @@
                                                     <div class="col-sm-4">
 
                                                         <th class="ps-0" scope="row">Verification :</th>
-                                                        <td class="text-muted"><span class="badge badge-soft-dark text-uppercase"><?= $leads[0]['verification'] ?></span></td>
+                                                        <td class="text-muted"><span class="badge badge-soft-<?= (($leads[0]['verification'] == 'New') ? 'primary' : (($leads[0]['verification'] == 'Verified') ? 'success' : 'danger')) ?> text-uppercase"><?= $leads[0]['verification'] ?></span></td>
 
                                                     </div>
 
@@ -141,7 +141,6 @@
                     </div>
 
 
-
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
@@ -149,13 +148,66 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title mb-3">Admin Comment</h5>
+
+                                            <?php
+                                            if (sessionId('position') == '1') {
+                                            ?>
+                                                <form method="post" enctype="multipart/form-data" action="<?= base_url('admincomment') ?>">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-label">Comment</label>
+                                                            <input type="hidden" class="form-control" name="lead_id" value="<?= $leads[0]['lid'] ?>" />
+                                                            <textarea class="form-control pd-r-80" name="comment"> </textarea>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="mb-0">
+                                                        <div class="col-md-4 text-right">
+                                                            <br>
+                                                            <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                                                                Submit
+                                                            </button>
+
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            <?php
+                                            }
+                                            ?>
+
                                             <div class="table-responsive">
-                                                <table class="table table-borderless mb-0">
+                                                <br>
+                                                <table id="" class="table table-striped" style="width:100%">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th class="sort" data-sort="Lead Type_name">Date</th>
+                                                            <th class="sort" data-sort="action">Comment</th>
+                                                        </tr>
+                                                    </thead>
                                                     <tbody>
                                                         <div class="row">
                                                             <div class="col-sm-12">
+                                                                <?php
+                                                                $comment = getWhereData('tbl_admin_comment', array('lead_id' => $leads[0]['lid']));
 
-                                                                <th class="ps-0" scope="row">Comment : <span class="text-muted"> <?= $leads[0]['comment'] ?> </span></td>
+                                                                if (!empty($comment)) {
+                                                                    foreach ($comment as $com) {
+
+
+                                                                ?>
+                                                                        <tr>
+                                                                            <th class="ps-0" scope="row"><span class="text-muted">
+                                                                                    <?= date_format(date_create($com['create_date']), 'd-m-Y') ?> </span></td>
+                                                                            <th class="ps-0" scope="row"><span class="text-muted">
+                                                                                    <?= $com['comment'] ?> </span></td>
+                                                                        </tr>
+
+                                                                <?php
+                                                                    }
+                                                                }
+                                                                ?>
+
+
 
                                                             </div>
 
@@ -203,7 +255,7 @@
                                                         $i = $i + 1;
                                                         $count = getWhereData('tbl_document_text',  array('doc_id' => $row['did'], 'lead_id' => $leads[0]['lid']));
                                                 ?>
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-6 pd10">
                                                             <i class="las la-random"></i> <?= ucwords($row['document']) ?>
                                                             <input type="text" class="form-control <?= $row['attr_id'] ?>" name="remark[]" value="<?= (($count == '') ? '' : $count[0]['remark']) ?> " id="<?= $row['attr_id'] ?>" maxlength="<?= (($row['attr_id'] == 'Numberonly') ? '12' : (($row['attr_id'] == 'ContactNumber') ? '10' : ''))
                                                                                                                                                                                                                                                 ?>">
@@ -237,10 +289,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
@@ -266,13 +314,7 @@
                                                 <th class="sort" data-sort="lead_name">verified</th>
                                                 <th class="sort" data-sort="lead_name">Doc. File</th>
 
-                                                <?php
-                                                if (sessionId('position') != '0') {
-                                                ?>
-                                                    <th class="sort" data-sort="lead_name">Remark</th>
-                                                <?php
-                                                }
-                                                ?>
+                                                <th class="sort" data-sort="lead_name">Remark</th>
 
                                             </tr>
                                         </thead>
@@ -298,9 +340,7 @@
 
                                                             <td class="lead_name"><input type="checkbox" class="custom" name="status[]" value="1" <?php
                                                                                                                                                     if ($count != '') {
-
                                                                                                                                                         if ($count[0]['status'] == 1) {
-
                                                                                                                                                             echo 'Checked';
                                                                                                                                                         } else {
                                                                                                                                                         }
@@ -342,7 +382,19 @@
 
 
                                                             <?php
-                                                            if (sessionId('position') != '0') {
+                                                            if (sessionId('position') == '0') {
+                                                            ?>
+
+                                                                <td> <?php
+                                                                        if ($count != '') {
+                                                                            echo $count[0]['remark'];
+                                                                        } else {
+                                                                            echo 'No Comment';
+                                                                        }
+                                                                        ?></td>
+
+                                                            <?php
+                                                            } else {
                                                             ?>
 
 
@@ -395,11 +447,22 @@
                     ?>
 
 
+
                         <div class="row">
                             <div class="col-lg-12">
                                 <h1 class="text-center">Submission of details:
                                 </h1>
                                 <h6 class="text-danger text-center">You can upload a submission file or enter details manually</h6>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-lg-12">
+
+
                                 <div class="card">
                                     <?php $file = getWhereData('tbl_submission_file',  array('lead_id' => $leads[0]['lid']));    ?>
 
@@ -421,9 +484,10 @@
 
                                                 <?php
                                                 if ($file != '') {
-                                                ?> <div class="col-md-6"> 
-                                                    <br><a href="<?= base_url() ?>/uploads/submission/<?= $file[0]['file'] ?>" class="btn btn-light" target="_blank">
-                                                    <img src="<?= base_url() ?>assets/document.png" height="50px"></a> </div>
+                                                ?> <div class="col-md-6">
+                                                        <br><a href="<?= base_url() ?>/uploads/submission/<?= $file[0]['file'] ?>" class="btn btn-light" target="_blank">
+                                                            <img src="<?= base_url() ?>assets/document.png" height="50px"></a>
+                                                    </div>
                                                 <?php
                                                 }
                                                 ?>
@@ -447,8 +511,7 @@
 
                         <div class="row">
                             <div class="col-lg-12">
-                                <!-- <h1 class="text-center">Submission of details:
-                                </h1> -->
+
                                 <div class="card">
 
                                     <?php if ($msg = $this->session->flashdata('smsg')) :
@@ -655,107 +718,142 @@
 
                         </div>
 
+                        <?php $file = getWhereData('tbl_submission_file',  array('lead_id' => $leads[0]['lid']));
 
-                        <div class="row">
-                            <div class="col-12">
+                        if ($file != '') {
 
+                        ?>
 
-                                <div class="card">
-                                    <div class="card-body">
-                                        <?php
-                                        if (!empty($submission)) {
-                                            foreach ($submission as $sub) {
-                                                $pr = 0;
-                                        ?>
+                            <div class="row">
+                                <div class="col-lg-12">
 
-                                                <table id="" class="table table-striped" style="width:100%">
-                                                    <h3><?= $sub['submissions'] ?> </h3>
-                                                    <thead class="table-light">
-                                                        <tr>
-                                                            <th class="sort" data-sort="date">Sno</th>
-                                                            <th class="sort" data-sort="date">Bill Date</th>
-                                                            <th class="sort" data-sort="date">Bill No.</th>
-                                                            <th class="sort" data-sort="lead_name">Party Name</th>
-                                                            <th class="sort" data-sort="lead_name">Amount</th>
-                                                            <th class="sort" data-sort="lead_name">Payment</th>
+                                    <!-- <h6 class="text-danger text-center">You can upload a submission file or enter details manually</h6> -->
+                                    <div class="card">
 
 
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="list form-check-all">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <h3>View Submission of details file -</h3>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <br><a href="<?= base_url() ?>/uploads/submission/<?= $file[0]['file'] ?>" class="btn btn-light" target="_blank">
+                                                        <img src="<?= base_url() ?>assets/document.png" height="50px"></a>
+                                                </div>
 
-
-                                                        <?php
-                                                        $i = 0;
-
-                                                        $submit = getWhereData('tbl_submission', array('submission_id' => $sub['sid'], 'lead_id' => $leads[0]['lid']));
-
-                                                        if (!empty($submit)) {
-                                                            foreach ($submit as $row) {
-                                                                $i = $i + 1;
-
-                                                                $submit_data = getWhereData('tbl_submission', array('sub_id' => $row['sub_id'], 'lead_id' => $leads[0]['lid']));
-
-                                                                // print_r($submit_data);
-
-
-                                                        ?>
-                                                                <form method="post" enctype="multipart/form-data" action="<?= base_url('admin_Dashboard/update_submission') ?>">
-                                                                    <tr>
-                                                                        <td class="lead_name"><?= $i; ?> </td>
-
-
-
-
-                                                                        <td><?= $submit_data[0]['bill_date'] ?>
-                                                                        </td>
-
-
-                                                                        <td> <?= $submit_data[0]['bill_no'] ?>
-                                                                        </td>
-
-
-                                                                        <td><?= $submit_data[0]['party_name'] ?>
-                                                                        </td>
-                                                                        <td><?= $submit_data[0]['amount'] ?>
-                                                                            <?php $pr += $submit_data[0]['amount'] ?>
-                                                                        </td>
-
-                                                                        <td>
-                                                                            <?= $submit_data[0]['payment']; ?>
-                                                                        </td>
-
-
-                                                                    </tr>
-                                                                </form>
-                                                        <?php
-                                                            }
-                                                        }
-                                                        ?>
-                                                        <tr>
-
-
-                                                            <td colspan="4">
-                                                            </td>
-                                                            <td colspan="3">Total : <span class="totalamt<?= $sub['sid'] ?>"><?= $pr ?></span></td>
-
-                                                        </tr>
-
-
-
-                                                    </tbody>
-                                                </table>
-                                        <?php
-                                            }
-                                        }
-                                        ?>
-
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                        <?php
+                        } else {
+                        ?>
+
+
+                            <div class="row">
+                                <div class="col-12">
+
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <?php
+                                            if (!empty($submission)) {
+                                                foreach ($submission as $sub) {
+                                                    $pr = 0;
+                                            ?>
+
+                                                    <table id="" class="table table-striped" style="width:100%">
+                                                        <h3><?= $sub['submissions'] ?> </h3>
+                                                        <thead class="table-light">
+                                                            <tr>
+                                                                <th class="sort" data-sort="date">Sno</th>
+                                                                <th class="sort" data-sort="date">Bill Date</th>
+                                                                <th class="sort" data-sort="date">Bill No.</th>
+                                                                <th class="sort" data-sort="lead_name">Party Name</th>
+                                                                <th class="sort" data-sort="lead_name">Amount</th>
+                                                                <th class="sort" data-sort="lead_name">Payment</th>
+
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="list form-check-all">
+
+
+                                                            <?php
+                                                            $i = 0;
+
+                                                            $submit = getWhereData('tbl_submission', array('submission_id' => $sub['sid'], 'lead_id' => $leads[0]['lid']));
+
+                                                            if (!empty($submit)) {
+                                                                foreach ($submit as $row) {
+                                                                    $i = $i + 1;
+
+                                                                    $submit_data = getWhereData('tbl_submission', array('sub_id' => $row['sub_id'], 'lead_id' => $leads[0]['lid']));
+
+                                                                    // print_r($submit_data);
+
+
+                                                            ?>
+                                                                    <form method="post" enctype="multipart/form-data" action="<?= base_url('admin_Dashboard/update_submission') ?>">
+                                                                        <tr>
+                                                                            <td class="lead_name"><?= $i; ?> </td>
+
+
+
+
+                                                                            <td><?= $submit_data[0]['bill_date'] ?>
+                                                                            </td>
+
+
+                                                                            <td> <?= $submit_data[0]['bill_no'] ?>
+                                                                            </td>
+
+
+                                                                            <td><?= $submit_data[0]['party_name'] ?>
+                                                                            </td>
+                                                                            <td><?= $submit_data[0]['amount'] ?>
+                                                                                <?php $pr += $submit_data[0]['amount'] ?>
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <?= $submit_data[0]['payment']; ?>
+                                                                            </td>
+
+
+                                                                        </tr>
+                                                                    </form>
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                            <tr>
+
+
+                                                                <td colspan="4">
+                                                                </td>
+                                                                <td colspan="3">Total : <span class="totalamt<?= $sub['sid'] ?>"><?= $pr ?></span></td>
+
+                                                            </tr>
+
+
+
+                                                        </tbody>
+                                                    </table>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                     <?php
+
+                        }
                     }
                     ?>
                 </div>

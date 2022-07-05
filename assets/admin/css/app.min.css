@@ -192,6 +192,28 @@
 	--vz-input-group-addon-bg: #2a2f34;
 	--vz-input-check-border: #33393f;
 }
+
+.pd10 {
+	padding: 10px;
+}
+@media (min-width: 1200px) {
+	.dd-none {
+		display: none;
+	}
+	.wdd-none {
+		display: block;
+	}
+}
+
+@media (max-width: 500px) {
+	.dd-none {
+		display: block;
+	}
+	.wdd-none {
+		display: none;
+	}
+}
+
 #page-topbar {
 	position: fixed;
 	top: 0;
@@ -14250,7 +14272,7 @@ span.flatpickr-weekday {
 }
 .navbar-landing {
 	padding: 10px 0;
-    background: white;
+	background: white;
 }
 @media (max-width: 991.98px) {
 	.navbar-landing {

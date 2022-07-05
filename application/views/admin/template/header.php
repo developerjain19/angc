@@ -45,7 +45,17 @@
                 <div class="dropdown ms-sm-3 header-item topbar-user">
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
-                            <img class="rounded-circle header-profile-user" src="<?= base_url() ?>assets/admin/images/users/user-dummy-img.jpg" alt="Header Avatar">
+                            <img class="rounded-circle header-profile-user" src="<?= base_url() ?>assets/admin/images/users/user-dummy-img.jpg" alt="Header Avatar"> &nbsp; Welcome <?= sessionId('s_name') ?> <?php
+                                                                                                                                                                                                                if (sessionId('position') == '0') {
+                                                                                                                                                                                                                ?> (Staff)
+
+                            <?php } else if (sessionId('position') == '2') {  ?>
+                                (Verifier)
+                            <?php } else {
+                                                                                                                                                                                                                    echo 'Admin';
+                                                                                                                                                                                                                }   ?>
+
+
 
                         </span>
                     </button>
@@ -101,6 +111,34 @@
 
                 </li>
 
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                        <i class="ri-account-circle-line"></i> <span data-key="t-authentication">Leads List</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarDashboards">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="<?= base_url(); ?>leads" class="nav-link" data-key="t-analytics"> All Leads
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url(); ?>leads?status=New" class="nav-link" data-key="t-analytics"> New
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url(); ?>leads?status=Verified" class="nav-link" data-key="t-crm"> Verified </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url(); ?>leads?status=Reject" class="nav-link" data-key="t-ecommerce"> Rejected </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+
+
+
                 <?php
                 if (sessionId('position') == '1') {
                 ?>
@@ -112,14 +150,8 @@
                     </li>
 
 
-                    <li class="nav-item">
-                        <a class="nav-link " href="<?= base_url('leads'); ?>">
-                            <i class="ri-account-circle-line"></i><span data-key="t-authentication">Leads List</span>
-                        </a>
 
-                    </li>
 
-                    
                     <li class="nav-item">
                         <a class="nav-link " href="<?= base_url('lead_type'); ?>">
                             <i class="ri-stack-line"></i><span data-key="t-authentication">Leads Type</span>
@@ -138,31 +170,7 @@
 
 
 
-                <?php
-                if (sessionId('position') == '0') {
-                ?>
-                    <li class="nav-item">
-                        <a class="nav-link " href="<?= base_url('leads'); ?>">
-                            <i class="ri-account-circle-line"></i><span data-key="t-authentication">Leads List</span>
-                        </a>
 
-                    </li>
-                <?php
-                }
-                ?>
-
-                <?php
-                if (sessionId('position') == '2') {
-                ?>
-                    <li class="nav-item">
-                        <a class="nav-link " href="<?= base_url('leads'); ?>">
-                            <i class="ri-account-circle-line"></i><span data-key="t-authentication">Leads List</span>
-                        </a>
-
-                    </li>
-                <?php
-                }
-                ?>
             </ul>
         </div>
         <!-- Sidebar -->

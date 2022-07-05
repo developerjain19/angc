@@ -24,6 +24,8 @@ class Admin_Dashboard extends CI_Controller
         $data['new'] = $this->CommonModal->getNumRows('tbl_leads', array('verification' => 'New'));
         $data['verified'] = $this->CommonModal->getNumRows('tbl_leads', array('verification' => 'Verified'));
         $data['staff'] =  $this->CommonModal->getNumRows('tbl_staff', "`position` NOT IN ('1')");
+        $data['reject'] = $this->CommonModal->getNumRows('tbl_leads', array('verification' => 'Reject'));
+
 
         $data['sleads'] = $this->CommonModal->getNumRows('tbl_leads',  array('staff_id' => sessionId('staff_id')));
         $data['snew'] = $this->CommonModal->getNumRows('tbl_leads', array('verification' => 'New', 'staff_id' => sessionId('staff_id')));
@@ -45,7 +47,7 @@ class Admin_Dashboard extends CI_Controller
         $data['title'] = 'Staff Registration';
 
         if (count($_POST) > 0) {
-            print_r($_POST);
+            // print_r($_POST);
 
             $post = $this->input->post();
 
@@ -72,9 +74,6 @@ class Admin_Dashboard extends CI_Controller
         $id = decryptId($id);
         $data['staff'] = $this->CommonModal->getRowById('tbl_staff', 'uid ', $id);
 
-
-
-
         if (count($_POST) > 0) {
             $post = $this->input->post();
             $update = $this->CommonModal->updateRowById('tbl_staff', 'uid ', $id, $post);
@@ -93,13 +92,22 @@ class Admin_Dashboard extends CI_Controller
 
     public function leads()
     {
-        $data['leads'] = $this->CommonModal->getAllRowsInOrder('tbl_leads', 'lid', 'desc');
+
+        $status =  $this->input->get('status');
+
+        if (isset($status)) {
+            $data['leads'] = $this->CommonModal->getRowByIdInOrder('tbl_leads',    array('verification' => $status), 'lid', 'desc');
+            $data['sleads'] = $this->CommonModal->getRowByIdInOrder('tbl_leads',    array('staff_id' => sessionId('staff_id'), 'verification' => $status), 'lid', 'desc');
+            $data['vleads'] = $this->CommonModal->getRowByIdInOrder('tbl_leads',    array('verifer' => sessionId('staff_id'), 'verification' => $status), 'lid', 'desc');
+        } else {
+            $data['leads'] = $this->CommonModal->getAllRowsInOrder('tbl_leads', 'lid', 'desc');
+            $data['sleads'] = $this->CommonModal->getRowByIdInOrder('tbl_leads',    array('staff_id' => sessionId('staff_id')), 'lid', 'desc');
+            $data['vleads'] = $this->CommonModal->getRowByIdInOrder('tbl_leads',    array('verifer' => sessionId('staff_id')), 'lid', 'desc');
+        }
+
+
         $data['ltype'] =  $this->CommonModal->getAllRowsInOrder('tbl_leadtype', 'tid', 'desc');
         $data['stype'] =  $this->CommonModal->getAllRowsInOrder('tbl_servicetype', 'sid', 'desc');
-
-        $data['sleads'] = $this->CommonModal->getRowByIdInOrder('tbl_leads',    array('staff_id' => sessionId('staff_id')), 'lid', 'desc');
-
-        $data['vleads'] = $this->CommonModal->getRowByIdInOrder('tbl_leads',    array('verifer' => sessionId('staff_id')), 'lid', 'desc');
         $data['title'] = 'Leads List';
 
 
@@ -116,6 +124,12 @@ class Admin_Dashboard extends CI_Controller
                     if (empty($regdataemail)) {
 
                         $formdata['user_code'] = 'ANUS' . rand(10, 1000);
+                        $formdata['password'] = substr($formdata['name'], 0, 3) . substr($formdata['number'], 0, 3);;
+
+                        $message = donormail($formdata['number'],  $formdata['password']);
+
+                        sendmail($formdata['email'], 'Registered with ANGC | Welcome User', $message);
+
                         $this->CommonModal->insertRowReturnId($table, $formdata);
                         redirect(base_url() . 'leads');
                     } elseif (count($regdataemail) == 1) {
@@ -280,7 +294,7 @@ class Admin_Dashboard extends CI_Controller
     public function insert_document()
     {
         if (count($_POST) > 0) {
-
+            $countImg = '';
             $did = $this->input->post('doc_id');
             $status = $this->input->post('status');
             $remark = $this->input->post('remark');
@@ -294,7 +308,9 @@ class Admin_Dashboard extends CI_Controller
             // print_r($_FILES);
             // exit;
 
-            $countImg = count($_FILES['image_temp']['name']);
+            if (isset($_FILES['image_temp']['name'])) {
+                $countImg = count($_FILES['image_temp']['name']);
+            }
             $responce = array();
             if (!empty($did)) {
                 for ($i = 0; $i < count($did); $i++) {
@@ -359,7 +375,7 @@ class Admin_Dashboard extends CI_Controller
                     if ($did[$i] != '') {
                         $data = array('doc_id' => $did[$i], 'lead_id' => $lid, 'remark' => $remark[$i]);
                         $datarow = $this->CommonModal->getRowByMoreId('tbl_document_text', array('doc_id' => $did[$i], 'lead_id' => $lid));
-                        print_r($datarow);
+                        // print_r($datarow);
 
 
 
@@ -423,6 +439,12 @@ class Admin_Dashboard extends CI_Controller
         $this->CommonModal->updateRowById('tbl_leads', 'lid', $pid, array('verification' => $status));
     }
 
+    public function leadworkingstatus()
+    {
+        $status = $this->input->post('wstatus');
+        $pid = $this->input->post('pid');
+        $this->CommonModal->updateRowById('tbl_leads', 'lid', $pid, array('working_status' => $status));
+    }
 
 
     public function lead_type()
@@ -431,7 +453,7 @@ class Admin_Dashboard extends CI_Controller
         $data['title'] = 'Lead Type';
 
         if (count($_POST) > 0) {
-            print_r($_POST);
+            // print_r($_POST);
 
             $post = $this->input->post();
 
@@ -476,7 +498,7 @@ class Admin_Dashboard extends CI_Controller
         $data['title'] = 'Service Type';
 
         if (count($_POST) > 0) {
-            print_r($_POST);
+            // print_r($_POST);
 
             $post = $this->input->post();
 
@@ -510,5 +532,24 @@ class Admin_Dashboard extends CI_Controller
         }
 
         redirect(base_url() . 'service_type');
+    }
+
+    public function admincomment()
+    {
+        $post = $this->input->post();
+        $lead_id = $this->input->post('lead_id');
+
+        $lid = encryptId($lead_id);
+
+        $insert = $this->Dashboard_model->insertdata('tbl_admin_comment', $post);
+
+        if ($insert) {
+            $this->session->set_flashdata('msg', 'Comment Added Successfull');
+            $this->session->set_flashdata('msg_class', 'alert-success');
+        } else {
+            $this->session->set_flashdata('msg', 'Something went wrong Please try again!!');
+            $this->session->set_flashdata('msg_class', 'alert-danger');
+        }
+        redirect(base_url() . 'documents/' . $lid);
     }
 }
